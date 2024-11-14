@@ -14,14 +14,16 @@
                 <td>{{ word.german }}</td>
 
                 <td width="75" class="center aligned">
-                    <router-link :to="{name: 'show', params:{id: word._id}}">Show</router-link>
+                    <router-link :to="{ name: 'show', params: { id: word._id } }">Show</router-link>
                 </td>
 
                 <td width="75" class="center aligned">
-                    <router-link :to="{name: 'edit', params:{id: word._id}}">Edit</router-link></td>
+                    <router-link :to="{ name: 'edit', params: { id: word._id } }">Edit</router-link>
+                </td>
 
                 <td width="75" class="center aligned" @click.prevent="onDestroy(word._id)">
-                    <a :href="`/words/${word._id}`">Destroy</a></td>
+                    <a :href="`/words/${word._id}`">Destroy</a>
+                </td>
             </tr>
         </table>
     </div>
@@ -34,23 +36,23 @@ import { api } from '../helpers/helpers';
 
 export default {
     name: 'ListWords',
-    data(){
+    data() {
         return {
             words: []
         };
     },
-    async mounted(){
+    async mounted() {
         this.words = await api.getWords();
     },
-    methods:{
-        async onDestroy(id){
+    methods: {
+        async onDestroy(id) {
             const sure = window.confirm('Are you sure?');
             if (!sure) return;
             await api.deleteWord(id);
             // this.flash('Word deleted successfully!', 'success');
             flashMessage.show({
-            text: 'delete successfully',
-            type: 'error',
+                text: 'delete successfully',
+                type: 'error',
             })
             const newWords = this.words.filter(word => word._id !== id);
             this.words = newWords;
@@ -58,4 +60,3 @@ export default {
     }
 };
 </script>
-

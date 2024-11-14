@@ -15,11 +15,11 @@ export default {
     components: {
         'word-form': WordForm
     },
-    data: function() {
+    data: function () {
         return {
             word: {},
             hasWord: false
-        };  
+        };
     },
     async mounted() {
         console.log("test");
@@ -27,13 +27,13 @@ export default {
         this.hasWord = true;
         console.log(this.word);
     },
-    methods:{
-        createOrUpdate: async function(word){
+    methods: {
+        createOrUpdate: async function (word) {
             await api.updateWord(word);
             // alert('Word updated sucessfully');
             flashMessage.show({
-            text: 'Update successfully',
-            type: 'success',
+                text: 'Update successfully',
+                type: 'success',
             })
             this.$router.push(`/words/${word._id}`);
         },

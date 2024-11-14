@@ -11,16 +11,16 @@ import { api } from '@/helpers/helpers';
 
 export default {
     name: 'new-word',
-    components:{
+    components: {
         'word-form': WordForm
     },
-    methods:{
-        createOrUpdate: async function(word){
+    methods: {
+        createOrUpdate: async function (word) {
             const res = await api.createWord(word);
             // this.flash('Word created', 'success');
             flashMessage.show({
-            text: 'Create successfully',
-            type: 'success',
+                text: 'Create successfully',
+                type: 'success',
             })
             this.$router.push(`/words/${res._id}`);
         }
