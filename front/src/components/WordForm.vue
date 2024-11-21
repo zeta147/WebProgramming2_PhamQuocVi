@@ -1,5 +1,8 @@
 <template>
+    <div>
     <form action="#" @submit.prevent="onSubmit">
+
+
         <p v-if="errorsPresent" class="error">Please fill out both fields</p>
         <div class="ui labeled input fluid">
             <div class="ui label">
@@ -13,15 +16,22 @@
             </div>
             <input type="text" placeholder="Enter word..." v-model="this.wordLocal.english"/>
         </div>
-        <div class="ui labeled input fuild">
+        <div class="ui labeled input fuild" v-if="this.checkedVietnamese">
             <div class="ui label">
-                <i class="vietnam flag"></i>English
+                <i class="vietnam flag"></i>Vietnamese
             </div>
             <input type="text" placeholder="Enter word..." v-model="this.wordLocal.vietnamese"/>
         </div>
 
         <button class="positive ui button">Submit</button>
     </form>
+    </div>
+    <div class="checkbox_container">
+        <form action="" @submit.prevent="onSubmit">
+            <input type="checkbox" name="language" value="vietnamese" v-model="checkedVietnamese">
+            <label for="vietnamese">Vietnamese</label><br>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -43,7 +53,8 @@ export default {
     data(){
         return{
             errorsPresent: true,
-            wordLocal: this.word
+            wordLocal: this.word,
+            checkedVietnamese: false,
         };
     },
     methods:{
@@ -60,3 +71,9 @@ export default {
     }
 };
 </script>
+
+<style>
+.checkbox_container{
+    position: relative;
+}
+</style>

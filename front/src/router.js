@@ -35,6 +35,11 @@ const routes = [
         name: 'test',
         component: TestWord
     },
+    // {
+    //     path: '/about',
+    //     name: 'about',
+    //     component: AboutWord
+    // }
 ]
 
 const router = createRouter({
