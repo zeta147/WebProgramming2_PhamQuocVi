@@ -13,6 +13,12 @@
             </div>
             <input type="text" placeholder="Enter word..." v-model="this.wordLocal.english"/>
         </div>
+        <div class="ui labeled input fuild">
+            <div class="ui label">
+                <i class="vietnam flag"></i>English
+            </div>
+            <input type="text" placeholder="Enter word..." v-model="this.wordLocal.vietnamese"/>
+        </div>
 
         <button class="positive ui button">Submit</button>
     </form>
@@ -29,6 +35,7 @@ export default {
                 return {
                     english: '',
                     german: '',
+                    vietnamese: '',
                 }
             }
         }

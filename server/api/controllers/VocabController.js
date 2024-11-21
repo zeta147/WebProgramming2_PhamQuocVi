@@ -4,10 +4,10 @@ const mongoose = require('mongoose'),
 Vocab = mongoose.model('Vocab');
 
 exports.list_all_words =  function(req, res){
-    Vocab.find({}, function(err, word){
+    Vocab.find({}, function(err, words){
         if(err)
             res.send(err);
-        res.json(word);
+        res.json(words);
     });
 };
 
@@ -48,6 +48,5 @@ exports.delete_a_word = function(req, res){
              message: 'Word successfully deleted', 
             _id: req.params.wordId
         })
-
     })
 }
