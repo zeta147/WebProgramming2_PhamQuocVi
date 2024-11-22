@@ -1,27 +1,25 @@
+<!-- eslint-disable vue/no-use-v-if-with-v-for -->
 <template>
     <form @submit.prevent="onSubmit">
         <div>
             <label for="language_drop_down_list" style="font-weight: bold;">Language: </label>
             <select id="language_drop_down_list" name="language" v-model="current_language">
-                <option value="english">English</option>
+                <option value="english" selected>English</option>
                 <option value="german">German</option>
                 <option value="vietnamese">Vietnamese</option>
             </select>
         </div>
         <br>
         <div class="search_bar_corner">
-            <input placeholder="Type to search" 
-                    id="search_bar" 
-                    type="search" 
-                    v-model="searching_word">
-            <button id="search_button" @click="searchWord(searching_word)">Search</button>
+            <input placeholder="Type to search" id="search_bar" type="search" v-model="searching_word">
+            <button id="search_button" @click="searchWord_V2(searching_word)">Search</button>
         </div>
     </form>
     <br>
     <!-- <div v-if="words.length > 0 ">{{ words }}</div> -->
     <div>
         <h1>Words</h1>
-        <div v-if="words.length === 0"></div>
+        <div v-if="words.length === 0">No words yet</div>
         <table v-if="words.length !== 0" id="ListWords" class="ui celled compact table">
             <thead>
                 <tr>
@@ -31,7 +29,7 @@
                     <th colspan="3"></th>
                 </tr>
             </thead>
-            <tr v-if="filtered_words.length == 0" v-for="(word, i) in words" :key="i">
+            <tr v-if="filtered_words.length == 0 && filtered_words != null" v-for="(word, i) in words" :key="i">
                 <td>{{ word.english }}</td>
                 <td>{{ word.german }}</td>
                 <td>{{ word.vietnamese }}</td>
@@ -106,17 +104,50 @@ export default {
             const newWords = this.words.filter(word => word._id !== id);
             this.words = newWords;
         },
-        async searchWord(parameter_searching_word){
-            this.filtered_words = [];
-            this.index = 0;
-            for(var row = 0; row < this.words.length; row++){
-                var word = this.words[row];
-                var current_language_word;
+        // async searchWord(parameter_searching_word) {
+        //     this.filtered_words = [];
+        //     this.index = 0;
+        //     for (var row = 0; row < this.words.length; row++) {
+        //         var word = this.words[row];
+        //         var current_language_word;
 
-                switch (this.current_language){
-                    case "english":
-                        current_language_word = word.english;
-                        break;
+        //         switch (this.current_language) {
+        //             case "english":
+        //                 current_language_word = word.english;
+        //                 break;
+        //             case "german":
+        //                 current_language_word = word.german;
+        //                 break;
+        //             case "vietnamese":
+        //                 current_language_word = word.vietnamese;
+        //                 break;
+        //             default:
+        //                 current_language_word = word.english;
+        //                 break
+        //         }
+
+        //         if (current_language_word.includes(parameter_searching_word)) {
+        //             this.filtered_words[this.index++] = word;
+        //         }
+        //     }
+        // },
+        async searchWord_V2(parameter_searching_word) {
+
+            if(parameter_searching_word.length < 2){
+                flashMessage.show({
+                    title: 'Search error',
+                    text: 'Minimum 2 charaters to seach',
+                    time: 2000,
+                    type: 'error',
+                    blockClass: 'custom-block-class',
+                })
+                return this.filtered_words = [];
+            }
+
+            this.filtered_words = this.words.filter((word) => {
+                var current_language_word;
+                switch (this.current_language) {
+
                     case "german":
                         current_language_word = word.german;
                         break;
@@ -125,23 +156,22 @@ export default {
                         break;
                     default:
                         current_language_word = word.english;
-                        break
+                        break;
                 }
 
-                if(current_language_word.includes(parameter_searching_word)){
-                    this.filtered_words[this.index++] = word;
-                }
-            }
-        }
+                return current_language_word.includes(parameter_searching_word) ? word : null;
+                
+            })
+        },
     }
 };
 </script>
 
 <style scoped>
-
-input:focus{
+input:focus {
     outline: none;
 }
+
 #search_bar {
     background-color: white;
     color: #000;
@@ -156,12 +186,22 @@ input:focus{
     border: 2px solid #000;
 } */
 
-#search_button{
+#search_button {
     background-color: black;
     color: white;
-    outline: none;
+    outline-color:black ;
     padding: 5px;
     border-color: white;
-
 }
+
+#search_button:hover{
+    background-color: #4c4c4c;
+    color: rgb(218, 218, 218);
+}
+
+#search_button:active{
+    background-color: white;
+    color: black
+}
+
 </style>

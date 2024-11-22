@@ -4,6 +4,7 @@ import NewWord from './views/NewWord.vue';
 import ShowWord from './views/ShowWord.vue';
 import EditWord from './views/EditWord.vue';
 import TestWord from './views/TestWord.vue';
+import AboutMe from './views/AboutMe.vue';
 
 const routes = [
     {   
@@ -35,11 +36,11 @@ const routes = [
         name: 'test',
         component: TestWord
     },
-    // {
-    //     path: '/about',
-    //     name: 'about',
-    //     component: AboutWord
-    // }
+    {
+        path: '/about',
+        name: 'about',
+        component: AboutMe
+    }
 ]
 
 const router = createRouter({
