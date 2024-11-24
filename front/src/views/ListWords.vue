@@ -29,7 +29,7 @@
                     <th colspan="3"></th>
                 </tr>
             </thead>
-            <tr v-if="filtered_words.length == 0 && filtered_words != null" v-for="(word, i) in words" :key="i">
+            <!-- <tr v-if="filtered_words.length == 0 && filtered_words != null" v-for="(word, i) in words" :key="i">
                 <td>{{ word.english }}</td>
                 <td>{{ word.german }}</td>
                 <td>{{ word.vietnamese }}</td>
@@ -45,13 +45,31 @@
                 <td width="75" class="center aligned" @click.prevent="onDestroy(word._id)">
                     <a :href="`/words/${word._id}`">Destroy</a>
                 </td>
-            </tr>
+            </tr> -->
 
 
-            <tr v-if="filtered_words.length > 0" v-for="(word, i) in filtered_words" :key="i">
+            <!-- <tr v-if="filtered_words.length > 0" v-for="(word, i) in filtered_words" :key="i">
                 <td>{{ word.english }}</td>
                 <td>{{ word.german }}</td>
                 <td>{{ word.vietnamese }}</td>
+
+                <td width="75" class="center aligned">
+                    <router-link :to="{ name: 'show', params: { id: word._id } }">Show</router-link>
+                </td>
+
+                <td width="75" class="center aligned">
+                    <router-link :to="{ name: 'edit', params: { id: word._id } }">Edit</router-link>
+                </td>
+
+                <td width="75" class="center aligned" @click.prevent="onDestroy(word._id)">
+                    <a :href="`/words/${word._id}`">Destroy</a>
+                </td>
+            </tr> -->
+            <tr v-for="(word, i) in filtered_words" :key="i">
+                <td>{{ word.english }}</td>
+                <td>{{ word.german }}</td>
+                <td v-if="word.vietnamese">{{ word.vietnamese }}</td>
+                <td v-else style="color: red;">N/A</td>
 
                 <td width="75" class="center aligned">
                     <router-link :to="{ name: 'show', params: { id: word._id } }">Show</router-link>
@@ -90,6 +108,7 @@ export default {
     },
     async mounted() {
         this.words = await api.getWords();
+        this.filtered_words = this.words;
     },
     methods: {
         async onDestroy(id) {
@@ -141,7 +160,7 @@ export default {
                     type: 'error',
                     blockClass: 'custom-block-class',
                 })
-                return this.filtered_words = [];
+                return this.filtered_words = this.words;
             }
 
             this.filtered_words = this.words.filter((word) => {
