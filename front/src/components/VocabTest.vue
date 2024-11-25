@@ -15,6 +15,12 @@
         </div>
         <input type="text" placeholder="Enter word..." v-model="english" :disabled="testOver" autocomplete="off" />
       </div>
+      <div class="ui labeled input fluid" v-if="checkVietnamseLocal">
+        <div class="ui label">
+          <i class="vietnam flag"></i> Vietnamese
+        </div>
+        <input type="text" placeholder="Enter word..." v-model="vietnamese" :disabled="testOver" autocomplete="off" />
+      </div>
 
       <button class="positive ui button" :disabled="testOver">Submit</button>
     </form>
@@ -33,6 +39,10 @@ export default {
     testWords: {
       type: Array,
       required: true
+    },
+    checkVietnamseLocal: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
@@ -42,6 +52,7 @@ export default {
       result: '',
       resultClass: '',
       english: '',
+      vietnamese: '',
       score: 0,
       testOver: false,
     };
@@ -53,23 +64,33 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      if (this.english === this.currWord.english) {
+      if (this.english === this.currWord.english && !this.checkVietnamseLocal) {
         flashMessage.show({
-                text: 'Correct!',
-                type: 'success',
-          })
+          text: 'Correct!',
+          type: 'success',
+        })
         // this.flash('Correct!', 'success', { timeout: 1000 });
         this.score += 1;
-      } else {
+      }
+      else if (this.english === this.currWord.english && (!this.checkVietnamseLocal || this.vietnamese === this.currWord.vietnamese)) {
         flashMessage.show({
-                text: 'Wrong!',
-                type: 'error',
-          })
+          text: 'Correct!',
+          type: 'success',
+        })
+        // this.flash('Correct!', 'success', { timeout: 1000 });
+        this.score += 1;
+      }
+      else {
+        flashMessage.show({
+          text: 'Wrong!',
+          type: 'error',
+        })
         // this.flash('Wrong!', 'error', { timeout: 1000 });
         this.incorrectGuesses.push(this.currWord.german);
       }
 
       this.english = '';
+      this.vietnamese = '';
       this.randWords.shift();
 
       if (this.randWords.length === 0) {

@@ -10,7 +10,7 @@ const app = createApp(App);
 app.use(router);
 app.use(VueFlashMessage, {
     messageOptions: {
-        timeout: 3000,
+        timeout: 2000,
         pasuseOnInteract: true,
     }
 });

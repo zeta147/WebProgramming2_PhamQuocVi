@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { flashMessage } from '@smartweb/vue-flash-message';
 export default {
     name: 'word-form',
     props: {
@@ -58,8 +59,20 @@ export default {
         onSubmit: function () {
             // console.log(`English: ${this.wordLocal.english}`);
             // console.log(`German: ${this.wordLocal.german}`);
-            if (this.word.english === '' || this.word.german === '') {
+            if ((this.word.english === '' || this.word.german === '') && !this.checkedVietnamese) {
                 this.errorsPresent = true;
+                flashMessage.show({
+                    text: 'Please type on missing field',
+                    type: 'warning',
+                })
+                console.log(this.word.vietnamese.length)
+            }
+            else if (this.word.english === '' || this.word.german === '' || this.word.vietnamese === ''){
+                this.errorsPresent = true;
+                flashMessage.show({
+                    text: 'Only accept minimum alphabet',
+                    type: 'warning',
+                })
             }
             else {
                 this.$emit('createOrUpdate', this.wordLocal)
@@ -72,21 +85,26 @@ export default {
 <style scoped>
 
 .checkbox_container {
-    position: absolute;
-    top: 5px;
-    left: -55%;
+    /* position: absolute; */
     font-size: large;
 }
 
 .checkbox_container > label{
     position: relative;
-    left: -35%
+    left: -40%
+}
+
+.checkbox_container > input{
+    position: relative;
+    left: -20%
 }
 
 .checkbox_container > p{
     position: relative;
-    left: 35%;
+    left: 0%;
     font-weight: bold;
 }
+
+
 
 </style>

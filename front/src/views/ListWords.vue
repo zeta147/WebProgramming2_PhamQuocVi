@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/no-use-v-if-with-v-for -->
 <template>
+    <h1>Words</h1>
     <form @submit.prevent="onSubmit">
         <div>
             <label for="language_drop_down_list" style="font-weight: bold;">Language: </label>
@@ -18,7 +19,6 @@
     <br>
     <!-- <div v-if="words.length > 0 ">{{ words }}</div> -->
     <div>
-        <h1>Words</h1>
         <div v-if="words.length === 0">No words yet</div>
         <table v-if="words.length !== 0" id="ListWords" class="ui celled compact table">
             <thead>
@@ -118,8 +118,8 @@ export default {
             // this.flash('Word deleted successfully!', 'success');
             flashMessage.show({
                 text: 'delete successfully',
-                type: 'error',
-            })
+                type: 'success',
+            });
             const newWords = this.words.filter(word => word._id !== id);
             this.words = newWords;
         },
@@ -151,8 +151,8 @@ export default {
         //     }
         // },
         async searchWord_V2(parameter_searching_word) {
-
-            if(parameter_searching_word.length < 2){
+            let searching_word_local = parameter_searching_word.trim();
+            if(searching_word_local.length < 2){
                 flashMessage.show({
                     title: 'Search error',
                     text: 'Minimum 2 charaters to seach',
@@ -164,9 +164,8 @@ export default {
             }
 
             this.filtered_words = this.words.filter((word) => {
-                var current_language_word;
+                let current_language_word;
                 switch (this.current_language) {
-
                     case "german":
                         current_language_word = word.german;
                         break;
@@ -177,9 +176,7 @@ export default {
                         current_language_word = word.english;
                         break;
                 }
-
-                return current_language_word.includes(parameter_searching_word) ? word : null;
-                
+                return current_language_word.includes(searching_word_local) ? word : null;
             })
         },
     }
