@@ -154,7 +154,7 @@ export default {
             let searching_word_local = parameter_searching_word.trim();
             if(searching_word_local.length < 2){
                 flashMessage.show({
-                    title: 'Search error',
+                    title: 'Error!',
                     text: 'Minimum 2 charaters to seach',
                     time: 2000,
                     type: 'error',

@@ -32,6 +32,7 @@ export default {
             await api.updateWord(word);
             // alert('Word updated sucessfully');
             flashMessage.show({
+                title: 'Successful!',
                 text: 'Update successfully',
                 type: 'success',
             })

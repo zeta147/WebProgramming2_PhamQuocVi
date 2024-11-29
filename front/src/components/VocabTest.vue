@@ -66,6 +66,7 @@ export default {
     onSubmit: function () {
       if (this.english === this.currWord.english && !this.checkVietnamseLocal) {
         flashMessage.show({
+          title: 'Test word',
           text: 'Correct!',
           type: 'success',
         })
@@ -74,6 +75,7 @@ export default {
       }
       else if (this.english === this.currWord.english && (!this.checkVietnamseLocal || this.vietnamese === this.currWord.vietnamese)) {
         flashMessage.show({
+          title: 'Test word',
           text: 'Correct!',
           type: 'success',
         })
@@ -82,6 +84,7 @@ export default {
       }
       else {
         flashMessage.show({
+          title: 'Test word',
           text: 'Wrong!',
           type: 'error',
         })

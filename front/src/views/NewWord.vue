@@ -19,6 +19,7 @@ export default {
             const res = await api.createWord(word);
             // this.flash('Word created', 'success');
             flashMessage.show({
+                title: 'Successful!',
                 text: 'Create successfully',
                 type: 'success',
             })

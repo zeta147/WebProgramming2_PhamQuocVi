@@ -62,6 +62,7 @@ export default {
             if ((this.word.english === '' || this.word.german === '') && !this.checkedVietnamese) {
                 this.errorsPresent = true;
                 flashMessage.show({
+                    title: 'Warning!',
                     text: 'Please type on missing field',
                     type: 'warning',
                 })
@@ -70,6 +71,7 @@ export default {
             else if (this.word.english === '' || this.word.german === '' || this.word.vietnamese === ''){
                 this.errorsPresent = true;
                 flashMessage.show({
+                    title: 'Warning!',
                     text: 'Only accept minimum alphabet',
                     type: 'warning',
                 })
