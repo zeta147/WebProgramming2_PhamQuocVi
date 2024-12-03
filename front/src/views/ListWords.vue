@@ -17,8 +17,8 @@
     </form>
     <br>
     <div>
-        <div v-if="words.length === 0">No words yet</div>
-        <table v-if="words.length !== 0" id="ListWords" class="ui celled compact table">
+        <div v-if="filtered_words.length === 0">No words yet</div>
+        <table v-if="filtered_words.length !== 0" id="ListWords" class="ui celled compact table">
             <thead>
                 <tr>
                     <th>English</th>
@@ -63,11 +63,19 @@ export default {
             filtered_words: [],
             searching_word: '',
             current_language: '',
+
         };
     },
     async mounted() {
         this.words = await api.getWords();
-        this.filtered_words = this.words;
+
+        if(this.words == null){
+            this.filtered_words = [];
+        }
+        else{
+            this.filtered_words = this.words;
+        }
+
     },
     methods: {
         async onDestroy(id) {

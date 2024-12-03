@@ -8,7 +8,7 @@
       <button class="start_test_button" @click="StartTheTest()">Start the test</button>
     </div><br>
     <button class="reset_test_button" @click="ResetTheTest()">Reset the test</button><br>
-    
+
     <!-- <div v-if="filtered_words.length < 5">
       <p style="color: red; font-weight: bold; ">You need to enter at least five words to begin the test</p>
     </div> -->
@@ -16,7 +16,7 @@
     <div v-if="filtered_words.length >= 5 && startTesting">
       <vocab-test :checkVietnamseLocal="checkVietnamese" :testWords="filtered_words"></vocab-test>
     </div>
-    
+
   </div>
 </template>
 
@@ -40,16 +40,21 @@ export default {
   },
   async mounted() {
     this.words = await api.getWords();
-    this.filtered_words = this.words;
+    if (this.words == null) {
+      this.filtered_words = [];
+    }
+    else {
+      this.filtered_words = this.words;
+    }
   },
   methods: {
     async StartTheTest() {
       this.CheckVietnameseWord();
       if (this.filtered_words.length >= 5)
         this.startTesting = true;
-      else{
+      else {
         flashMessage.show({
-          title:"Warning!",
+          title: "Warning!",
           text: "You need to enter at least five words to begin the test",
           type: "warning",
           time: 5000,

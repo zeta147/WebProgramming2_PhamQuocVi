@@ -7,7 +7,8 @@ const handleError = fn => (...params) =>
     fn(...params).catch(error => {
         console.log(error);
         flashMessage.show({
-            text: `error: ${error.response.status}: ${error.response.statusText}`,
+            title: `error: ${error.response}`,
+            text:  `${error.message}`,
             type: 'error',
         })
     })
