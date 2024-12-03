@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-use-v-if-with-v-for -->
 <template>
     <h1>Words</h1>
     <form @submit.prevent="onSubmit">
@@ -17,7 +16,6 @@
         </div>
     </form>
     <br>
-    <!-- <div v-if="words.length > 0 ">{{ words }}</div> -->
     <div>
         <div v-if="words.length === 0">No words yet</div>
         <table v-if="words.length !== 0" id="ListWords" class="ui celled compact table">
@@ -29,42 +27,6 @@
                     <th colspan="3"></th>
                 </tr>
             </thead>
-            <!-- <tr v-if="filtered_words.length == 0 && filtered_words != null" v-for="(word, i) in words" :key="i">
-                <td>{{ word.english }}</td>
-                <td>{{ word.german }}</td>
-                <td>{{ word.vietnamese }}</td>
-
-                <td width="75" class="center aligned">
-                    <router-link :to="{ name: 'show', params: { id: word._id } }">Show</router-link>
-                </td>
-
-                <td width="75" class="center aligned">
-                    <router-link :to="{ name: 'edit', params: { id: word._id } }">Edit</router-link>
-                </td>
-
-                <td width="75" class="center aligned" @click.prevent="onDestroy(word._id)">
-                    <a :href="`/words/${word._id}`">Destroy</a>
-                </td>
-            </tr> -->
-
-
-            <!-- <tr v-if="filtered_words.length > 0" v-for="(word, i) in filtered_words" :key="i">
-                <td>{{ word.english }}</td>
-                <td>{{ word.german }}</td>
-                <td>{{ word.vietnamese }}</td>
-
-                <td width="75" class="center aligned">
-                    <router-link :to="{ name: 'show', params: { id: word._id } }">Show</router-link>
-                </td>
-
-                <td width="75" class="center aligned">
-                    <router-link :to="{ name: 'edit', params: { id: word._id } }">Edit</router-link>
-                </td>
-
-                <td width="75" class="center aligned" @click.prevent="onDestroy(word._id)">
-                    <a :href="`/words/${word._id}`">Destroy</a>
-                </td>
-            </tr> -->
             <tr v-for="(word, i) in filtered_words" :key="i">
                 <td>{{ word.english }}</td>
                 <td>{{ word.german }}</td>
@@ -85,9 +47,6 @@
             </tr>
         </table>
     </div>
-    <!-- <div>
-        {{ filtered_words }}
-    </div> -->
 </template>
 
 
@@ -115,7 +74,6 @@ export default {
             const sure = window.confirm('Are you sure?');
             if (!sure) return;
             await api.deleteWord(id);
-            // this.flash('Word deleted successfully!', 'success');
             flashMessage.show({
                 text: 'delete successfully',
                 type: 'success',
@@ -123,33 +81,6 @@ export default {
             const newWords = this.words.filter(word => word._id !== id);
             this.words = newWords;
         },
-        // async searchWord(parameter_searching_word) {
-        //     this.filtered_words = [];
-        //     this.index = 0;
-        //     for (var row = 0; row < this.words.length; row++) {
-        //         var word = this.words[row];
-        //         var current_language_word;
-
-        //         switch (this.current_language) {
-        //             case "english":
-        //                 current_language_word = word.english;
-        //                 break;
-        //             case "german":
-        //                 current_language_word = word.german;
-        //                 break;
-        //             case "vietnamese":
-        //                 current_language_word = word.vietnamese;
-        //                 break;
-        //             default:
-        //                 current_language_word = word.english;
-        //                 break
-        //         }
-
-        //         if (current_language_word.includes(parameter_searching_word)) {
-        //             this.filtered_words[this.index++] = word;
-        //         }
-        //     }
-        // },
         async searchWord_V2(parameter_searching_word) {
             let searching_word_local = parameter_searching_word.trim();
             if(searching_word_local.length < 2){
@@ -195,12 +126,6 @@ input:focus {
     padding: 5px;
     outline: none;
 }
-
-/* .corner {
-    background-color: white;
-    border-radius: 25px;
-    border: 2px solid #000;
-} */
 
 #search_button {
     background-color: black;

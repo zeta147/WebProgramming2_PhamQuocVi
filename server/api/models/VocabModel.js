@@ -1,5 +1,3 @@
-// Onwer: PhamQuocVi - GCS220283
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

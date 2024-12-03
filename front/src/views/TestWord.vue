@@ -62,7 +62,6 @@ export default {
     },
 
     async CheckVietnameseWord() {
-      // console.log(this.checkVietnamese)
       if (this.checkVietnamese) {
         this.filtered_words = this.words.filter((word) => {
           return word.vietnamese == '' ? word : null;

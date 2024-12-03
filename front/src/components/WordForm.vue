@@ -57,8 +57,6 @@ export default {
     },
     methods: {
         onSubmit: function () {
-            // console.log(`English: ${this.wordLocal.english}`);
-            // console.log(`German: ${this.wordLocal.german}`);
             if ((this.word.english === '' || this.word.german === '') && !this.checkedVietnamese) {
                 this.errorsPresent = true;
                 flashMessage.show({
@@ -87,7 +85,6 @@ export default {
 <style scoped>
 
 .checkbox_container {
-    /* position: absolute; */
     font-size: large;
 }
 

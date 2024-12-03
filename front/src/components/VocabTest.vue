@@ -70,7 +70,6 @@ export default {
           text: 'Correct!',
           type: 'success',
         })
-        // this.flash('Correct!', 'success', { timeout: 1000 });
         this.score += 1;
       }
       else if (this.english === this.currWord.english && (!this.checkVietnamseLocal || this.vietnamese === this.currWord.vietnamese)) {
@@ -79,7 +78,6 @@ export default {
           text: 'Correct!',
           type: 'success',
         })
-        // this.flash('Correct!', 'success', { timeout: 1000 });
         this.score += 1;
       }
       else {
@@ -88,7 +86,6 @@ export default {
           text: 'Wrong!',
           type: 'error',
         })
-        // this.flash('Wrong!', 'error', { timeout: 1000 });
         this.incorrectGuesses.push(this.currWord.german);
       }
 
