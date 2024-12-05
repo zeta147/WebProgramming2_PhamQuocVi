@@ -1,0 +1,13 @@
+$myColor: #0000ff;
+
+.a {
+    .nested {
+        .selector {
+            color: $myColor;
+        }
+    }
+}
+
+body{
+    color: burlywood;
+}

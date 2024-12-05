@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>PhamQuocVi-week3</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+
+</head>
+
+<body>
+  <div class="nav-bar"></div>
+  <div id="app">
+    <div class="cart">
+      <p>Cart({{cart}})</p>
+    </div>
+    <div class="product">
+      <div class="product-image">
+        <img v-bind:src="image" v-bind:alt="altText">
+      </div>
+      <div class="product-info">
+        <!-- <h1>{{product}}</h1> -->
+        <h1>{{title}}</h1> <!-- computed porperties -->
+        <h2>{{sale}}</h2> <!-- challenge 7.1 -->
+        <p>{{description}}</p>
+        <!-- <span v-if="onSale">On Sale!</span> -->
+        <span :class="{ inStock: !inStock }">In stock</span> <!-- challenge 6 -->
+        <ul v-for="detail in details">
+          <li>{{detail}}</li>
+        </ul>
+        <!-- <div v-for="variant in variants" :key="variant.variantId" class="color-box"
+          :style="{ backgroundColor: variant.variantColor }" 
+          @mouseover="updateProduct(variant.variantImg)">
+          <p @mouseover="updateProduct(variant.variantImg)">{{variant.variantColor}}</p>
+        </div> -->
+        <div v-for="(variant, index) in variants" :key="variant.variantId" class="color-box"
+              :style="{ backgroundColor: variant.variantColor }" 
+              @mouseover="updateProduct(index); onSale = variant.variantOnSale"> <!-- challenge 7.2 -->
+        </div>
+        <div><a v-bind:href="anchorLink">Link to VueJs lesson 2</a></div>
+        <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">Add to cart</button>
+        <br>
+        <button v-on:click="removeFromCart">Remove from cart</button> <!-- challenge 5 -->
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
