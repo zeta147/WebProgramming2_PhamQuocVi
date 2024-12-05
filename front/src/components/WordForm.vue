@@ -61,7 +61,7 @@ export default {
                 this.errorsPresent = true;
                 flashMessage.show({
                     title: 'Warning!',
-                    text: 'Please type on missing field',
+                    text: 'Please type on missing fields',
                     type: 'warning',
                 })
                 console.log(this.word.vietnamese.length)
@@ -70,7 +70,7 @@ export default {
                 this.errorsPresent = true;
                 flashMessage.show({
                     title: 'Warning!',
-                    text: 'Only accept minimum alphabet',
+                    text: 'Please type on missing fields',
                     type: 'warning',
                 })
             }
