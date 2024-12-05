@@ -64,9 +64,8 @@ export default {
                     text: 'Please type on missing fields',
                     type: 'warning',
                 })
-                console.log(this.word.vietnamese.length)
             }
-            else if (this.word.english === '' || this.word.german === '' || this.word.vietnamese === ''){
+            else if (this.word.english === '' || this.word.german === '' || (this.checkedVietnamese && this.word.vietnamese === '')){
                 this.errorsPresent = true;
                 flashMessage.show({
                     title: 'Warning!',

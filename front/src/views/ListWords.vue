@@ -21,9 +21,9 @@
         <table v-if="filtered_words.length !== 0" id="ListWords" class="ui celled compact table">
             <thead>
                 <tr>
-                    <th>English</th>
-                    <th>German</th>
-                    <th>Vietnamese</th>
+                    <th><i class="united kingdom flag"></i>English</th>
+                    <th><i class="germany flag"></i>German</th>
+                    <th><i class="vietnam flag"></i>Vietnamese</th>
                     <th colspan="3"></th>
                 </tr>
             </thead>
@@ -83,11 +83,12 @@ export default {
             if (!sure) return;
             await api.deleteWord(id);
             flashMessage.show({
+                title: 'Delete:',
                 text: 'delete successfully',
                 type: 'success',
             });
             const newWords = this.words.filter(word => word._id !== id);
-            this.words = newWords;
+            this.filtered_words = newWords;
         },
         async searchWord_V2(parameter_searching_word) {
             let searching_word_local = parameter_searching_word.trim();

@@ -8,11 +8,7 @@
       <button class="start_test_button" @click="StartTheTest()">Start the test</button>
     </div><br>
     <button class="reset_test_button" @click="ResetTheTest()">Reset the test</button><br>
-
-    <!-- <div v-if="filtered_words.length < 5">
-      <p style="color: red; font-weight: bold; ">You need to enter at least five words to begin the test</p>
-    </div> -->
-
+    
     <div v-if="filtered_words.length >= 5 && startTesting">
       <vocab-test :checkVietnamseLocal="checkVietnamese" :testWords="filtered_words"></vocab-test>
     </div>
@@ -69,7 +65,8 @@ export default {
     async CheckVietnameseWord() {
       if (this.checkVietnamese) {
         this.filtered_words = this.words.filter((word) => {
-          return word.vietnamese == '' ? word : null;
+          return word.vietnamese !== '' ? word : null;
+          
         })
       }
       else {
